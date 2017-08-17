@@ -234,6 +234,9 @@ include $(BUILD_SYSTEM)/envsetup.mk
 FIND_LEAVES_EXCLUDES := $(addprefix --prune=, $(SCAN_EXCLUDE_DIRS) .repo .git)
 
 -include vendor/extra/BoardConfigExtra.mk
+ifneq ($(STREAK_BUILD),)
+include vendor/streak/config/BoardConfigStreak.mk
+endif
 
 # The build system exposes several variables for where to find the kernel
 # headers:
@@ -1175,5 +1178,11 @@ DEFAULT_DATA_OUT_MODULES := ltp $(ltp_packages) $(kselftest_modules)
 .KATI_READONLY := DEFAULT_DATA_OUT_MODULES
 
 include vendor/streak/build/core/config.mk
+
+ifneq ($(STREAK_BUILD),)
+## We need to be sure the global selinux policies are included
+## last, to avoid accidental resetting by device configs
+$(eval include device/streak/sepolicy/common/sepolicy.mk)
+endif
 
 include $(BUILD_SYSTEM)/dumpvar.mk

@@ -1003,7 +1003,27 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
   # Dump fingerprints
   script.Print("Target: {}".format(target_info.fingerprint))
 
+  android_version = target_info.GetBuildProp("ro.build.version.release")
+  security_patch = target_info.GetBuildProp("ro.build.version.security_patch")
+  device = target_info.GetBuildProp("ro.streak.device")
+
+  script.Print("--------------------------------------------");
+  script.Print(" Security patch: %s"%(security_patch));
+  script.Print(" Android version: %s"%(android_version));
+  script.Print(" Device: %s"%(device));
+  script.Print("--------------------------------------------");
+
   device_specific.FullOTA_InstallBegin()
+
+  CopyInstallTools(output_zip)
+  script.UnpackPackageDir("install", "/tmp/install")
+  script.SetPermissionsRecursive("/tmp/install", 0, 0, 0o755, 0o644, None, None)
+  script.SetPermissionsRecursive("/tmp/install/bin", 0, 0, 0o755, 0o755, None, None)
+
+  if target_info.get("system_root_image") == "true":
+    sysmount = "/system_root"
+  else:
+    sysmount = "/system"
 
   if OPTIONS.backuptool:
     script.RunBackup("backup", sysmount, target_info.get('use_dynamic_partitions') == "true")

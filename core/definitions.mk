@@ -114,6 +114,12 @@ ALL_COMPATIBILITY_SUITES :=
 # ALL_DEPS.*.ALL_DEPS keys
 ALL_DEPS.MODULES :=
 
+# All LINK_TYPE entries
+ALL_LINK_TYPES :=
+
+# All modules already converted to Soong
+SOONG_ALREADY_CONV :=
+
 ###########################################################
 ## Debugging; prints a variable list to stdout
 ###########################################################

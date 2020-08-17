@@ -809,8 +809,13 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
   device = target_info.GetBuildProp("ro.streak.device")
 
   script.Print("--------------------------------------------");
-  script.Print(" Security patch: %s"%(security_patch));
+  script.Print("           __            __                 ");
+  script.Print("          /__)_   '_ __/( _/_ _ _ /         ");
+  script.Print("         /   / ()/(-( /__)// (-(//(         ");
+  script.Print("               _/                           ");
+  script.Print("--------------------------------------------");
   script.Print(" Android version: %s"%(android_version));
+  script.Print(" Security patch: %s"%(security_patch));
   script.Print(" Device: %s"%(device));
   script.Print("--------------------------------------------");
 

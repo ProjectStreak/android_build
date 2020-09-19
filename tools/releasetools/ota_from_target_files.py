@@ -809,6 +809,8 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
   script.Print("Target: {}".format(target_info.fingerprint))
 
   script.AppendExtra("ifelse(is_mounted(\"/system\"), unmount(\"/system\"));")
+  streak_version = target_info.GetBuildProp("ro.streak.version")
+  streak_codename = target_info.GetBuildProp("ro.streak.codename")
   android_version = target_info.GetBuildProp("ro.build.version.release")
   security_patch = target_info.GetBuildProp("ro.build.version.security_patch")
   device = target_info.GetBuildProp("ro.streak.device")
@@ -819,6 +821,8 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
   script.Print("         /   / ()/(-( /__)// (-(//(         ");
   script.Print("               _/                           ");
   script.Print("--------------------------------------------");
+  script.Print(" Streak version: %s"%(streak_version));
+  script.Print(" Streak codename: %s"%(streak_codename));
   script.Print(" Android version: %s"%(android_version));
   script.Print(" Security patch: %s"%(security_patch));
   script.Print(" Device: %s"%(device));

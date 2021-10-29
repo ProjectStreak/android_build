@@ -271,6 +271,8 @@ $(call add_json_bool, SepolicySplit, $(filter true,$(PRODUCT_SEPOLICY_SPLIT)))
 
 $(call add_json_str_omitempty, Target_init_vendor_lib, $(TARGET_INIT_VENDOR_LIB))
 
+$(call add_json_str_omitempty, Target_surfaceflinger_udfps_lib, $(TARGET_SURFACEFLINGER_UDFPS_LIB))
+
 $(call json_end)
 
 $(file >$(SOONG_VARIABLES).tmp,$(json_contents))

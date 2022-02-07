@@ -757,6 +757,8 @@ function lunch()
     set_stuff_for_environment
     [[ -n "${ANDROID_QUIET_BUILD:-}" ]] || printconfig
     destroy_build_var_cache
+
+    streakprebuilts
 }
 
 unset COMMON_LUNCH_CHOICES_CACHE
@@ -1888,3 +1890,10 @@ addcompletions
 export ANDROID_BUILD_TOP=$(gettop)
 
 . $ANDROID_BUILD_TOP/vendor/streak/build/envsetup.sh
+
+function streakprebuilts() {
+    if [ -z ${STREAK_PREBUILTS} ]; then
+        bash $ANDROID_BUILD_TOP/packages/apps/StreakPrebuilts/StreakPrebuilts.sh
+        export STREAK_PREBUILTS=1
+    fi
+}
